@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My ADHD Journey — Self-Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F7F4EE;
+    --ink: #1A1814;
+    --ink-soft: #3D3A34;
+    --ink-muted: #7A776E;
+    --amber: #C9843A;
+    --amber-light: #F5EAD8;
+    --amber-mid: #E8C990;
+    --teal: #2D7D6E;
+    --teal-light: #D8EDE9;
+    --coral: #C25A45;
+    --coral-light: #F5E0DA;
+    --purple: #5B4A9E;
+    --purple-light: #EAE6F8;
+    --border: rgba(26,24,20,0.12);
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.4;
+  }
+
+  /* Hero */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 2rem 4rem;
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .hero-label {
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--amber);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 560px;
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.6s;
+  }
+
+  .hero-meta {
+    margin-top: 3rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.8s;
+  }
+
+  .meta-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--ink-muted);
+  }
+
+  .meta-chip span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--amber);
+    flex-shrink: 0;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 0;
+    font-size: 12px;
+    color: var(--ink-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1.2s;
+  }
+
+  .scroll-hint::after {
+    content: '';
+    width: 40px; height: 1px;
+    background: var(--ink-muted);
+  }
+
+  /* Sections */
+  .section {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  .section-intro {
+    font-size: 1rem;
+    color: var(--ink-soft);
+    max-width: 600px;
+    margin-bottom: 3rem;
+    line-height: 1.8;
+  }
+
+  /* Symptom cards */
+  .symptom-grid {
+    display: grid;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .symptom-card {
+    background: var(--cream);
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+  }
+
+  .symptom-card:hover { background: #F0EDE5; }
+
+  .symptom-card.open { background: #FDFCF9; }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    gap: 1rem;
+  }
+
+  .card-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .card-badge {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .badge-strong { background: var(--amber-light); color: var(--amber); }
+  .badge-present { background: var(--teal-light); color: var(--teal); }
+  .badge-notable { background: var(--purple-light); color: var(--purple); }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .card-toggle {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    color: var(--ink-muted);
+  }
+
+  .symptom-card.open .card-toggle {
+    background: var(--amber);
+    border-color: var(--amber);
+    color: white;
+    transform: rotate(45deg);
+  }
+
+  .card-toggle svg { width: 14px; height: 14px; }
+
+  .card-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-body-inner {
+    padding: 0 1.5rem 1.5rem;
+    border-top: 1px solid var(--border);
+    padding-top: 1.25rem;
+  }
+
+  .card-body-inner p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-body-inner p:last-child { margin-bottom: 0; }
+
+  .card-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--amber);
+    border-left: 2px solid var(--amber-mid);
+    padding-left: 1rem;
+    margin-top: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Timeline section */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.6s ease;
+  }
+
+  .timeline-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -2rem;
+    top: 6px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 2px solid var(--amber);
+    transform: translateX(-4px);
+  }
+
+  .timeline-period {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline-title {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+  }
+
+  .timeline-body {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.75;
+    max-width: 600px;
+  }
+
+  /* Assessment result */
+  .result-box {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 20px;
+    padding: 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .result-box::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    background: var(--amber);
+    opacity: 0.08;
+  }
+
+  .result-box::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: -40px;
+    width: 150px; height: 150px;
+    border-radius: 50%;
+    background: var(--teal);
+    opacity: 0.08;
+  }
+
+  .result-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 1rem;
+  }
+
+  .result-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    color: var(--cream);
+  }
+
+  .result-body {
+    font-size: 15px;
+    line-height: 1.8;
+    color: rgba(247,244,238,0.8);
+    max-width: 580px;
+    margin-bottom: 2rem;
+  }
+
+  .result-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 2rem;
+  }
+
+  .result-tag {
+    font-size: 12px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(247,244,238,0.2);
+    color: rgba(247,244,238,0.7);
+  }
+
+  .result-tag.highlight {
+    background: var(--amber);
+    border-color: var(--amber);
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .next-step {
+    background: rgba(247,244,238,0.06);
+    border: 1px solid rgba(247,244,238,0.15);
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(247,244,238,0.75);
+  }
+
+  .next-step strong {
+    color: var(--cream);
+    font-weight: 500;
+  }
+
+  /* Score bar */
+  .scores {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .score-label {
+    font-size: 13px;
+    color: var(--ink-soft);
+    width: 160px;
+    flex-shrink: 0;
+  }
+
+  .score-track {
+    flex: 1;
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    overflow: visible;
+    position: relative;
+  }
+
+  .score-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--amber);
+    width: 0;
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .score-pct {
+    font-size: 12px;
+    color: var(--ink-muted);
+    width: 40px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  /* Nav */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: rgba(247,244,238,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 13px;
+    color: var(--ink-muted);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  /* Divider */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem 0;
+    color: var(--ink-muted);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* Animations */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--ink-muted);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .score-label { width: 110px; font-size: 12px; }
+    .result-box { padding: 2rem 1.5rem; }
+    .card-header { padding: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">My ADHD Journey</div>
+  <ul class="nav-links">
+    <li><a href="#symptoms">Symptoms</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#assessment">Assessment</a></li>
+    <li><a href="#next">Next Steps</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-label">Personal Self-Assessment</div>
+  <h1>Living with<br><em>an untamed</em><br>mind.</h1>
+  <p class="hero-sub">A documented account of lifelong patterns — from unfinished Word documents to last-minute exams — mapped against clinical ADHD criteria.</p>
+  <div class="hero-meta">
+    <div class="meta-chip"><span></span> Combined-type ADHD indicators</div>
+    <div class="meta-chip"><span></span> Lifelong onset — childhood to adult</div>
+    <div class="meta-chip"><span></span> Multiple settings affected</div>
+  </div>
+  <div class="scroll-hint">Scroll to explore</div>
+</section>
+
+<!-- SYMPTOMS -->
+<section class="section" id="symptoms">
+  <div class="section-label">Section 01</div>
+  <h2 class="section-title fade-in">The symptoms,<br>mapped.</h2>
+  <p class="section-intro fade-in">Each pattern below comes directly from lived experience and is matched against DSM-5 diagnostic criteria for ADHD. Tap any card to expand.</p>
+
+  <div class="divider fade-in">Inattentive cluster</div>
+
+  <div class="symptom-grid fade-in">
+    <div class="symptom-card" onclick="toggleCard(this)">
+      <div class="card-header">
+        <div class="card-left">
+          <span class="card-badge badge-strong">Strong match</span>
+          <span class="card-title">Fails to sustain attention — leaves tasks unfinished</span>
+        </div>
+        <button class="card-toggle" aria-label="Expand">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>New Word documents written constantly — with genuine enthusiasm — then never saved or finished. This isn't laziness; it's the dopamine of the idea evaporating the moment execution begins.</p>
+          <p>Pattern repeats across school (never had complete books), IT Engineering (quit), foundation degree (repeated semesters, never attended lectures), and diploma (studied hours before 6 months of content).</p>
+          <p class="card-quote">"I write up new Word documents with new ideas always but never finish or save the document. It stays unsaved always on my laptop."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="symptom-card" onclick="toggleCard(this)">
+      <div class="card-header">
+        <div class="card-left">
+          <span class="card-badge badge-strong">Strong match</span>
+          <span class="card-title">Mind hijacked by extraneous thoughts mid-task</span>
+        </div>
+        <button class="card-toggle" aria-label="Expand">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>The mind branches into 10 different thoughts — related and unrelated — in under 10 seconds mid-conversation, before snapping back. This is involuntary, not a choice.</p>
+          <p>Carries a plate to get water, realizes mid-journey the reason for the trip. The working memory simply didn't hold the original intention long enough.</p>
+          <p class="card-quote">"My mind goes to 10 different related and unrelated thoughts in under 10 seconds and I snap back into reality."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="symptom-card" onclick="toggleCard(this)">
+      <div class="card-header">
+        <div class="card-left">
+          <span class="card-badge badge-strong">Strong match</span>
+          <span class="card-title">Chronic forgetfulness across all areas of life</span>
+        </div>
+        <button class="card-toggle" aria-label="Expand">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>Constantly losing phones, wallets, keys, and powerbanks — spending hours searching. Routine things forgotten repeatedly despite knowing they matter.</p>
+          <p>Most telling: attended a repeat university exam entirely unprepared — not because of avoidance, but because the exam had genuinely been forgotten while working.</p>
+          <p class="card-quote">"I went to the exam without studying cus I was working at that time and completely didn't remember I had a subject to finish off."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="symptom-card" onclick="toggleCard(this)">
+      <div class="card-header">
+        <div class="card-left">
+          <span class="card-badge badge-strong">Strong match</span>
+          <span class="card-title">Procrastination driven by inability to initiate</span>
+        </div>
+        <button class="card-toggle" aria-label="Expand">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>Last-minute studying is not a bad habit — it is the ADHD nervous system finally activating under genuine urgency. The brain requires interest, urgency, or pressure to initiate effort.</p>
+          <p>Studied 6–8 months of diploma content in hours before the exam and passed. The knowledge was always there. The activation wasn't. Tried and tested many solutions to procrastination — none worked sustainably.</p>
+          <p class="card-quote">"I need stress, pressure, urgency, fear to get things done."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="symptom-card" onclick="toggleCard(this)">
+      <div class="card-header">
+        <div class="card-left">
+          <span class="card-badge badge-strong">Strong match</span>
+          <span class="card-title">Poor time perception — "time blindness"</span>
+        </div>
+        <button class="card-toggle" aria-label="Expand">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>Scheduling meetings back to back with no buffer — not from arrogance but from a genuine inability to feel how long things take. The future doesn't register as real until it's nearly now.</p>
+          <p>Family consistently remarks on this. It is one of the most consistent complaints across years and relationships.</p>
+          <p class="card-quote">"I have no sense of time. Family complains."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider fade-in">Hyperactive / impulsive cluster</div>
+
+  <div class="symptom-grid fade-in">
+    <div class="symptom-card" onclick="toggleCard(this)">
+      <div class="card-header">
+        <div class="card-left">
+          <span class="card-badge badge-strong">Strong match</span>
+          <span class="card-title">Physical restlessness — can't stay still</span>
+        </div>
+        <button class="card-toggle" aria-label="Expand">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>Leg tapping and fidgeting are constant. Difficulty sitting in one place cited as one of the reasons for leaving IT and coding — the environment demanded stillness the body refused.</p>
+          <p>Was in sports 24/7 during school — not just interest, but a nervous system that needed movement to function.</p>
+          <p class="card-quote">"I step/tap my leg many times, like fidgeting. I always want to move. One of the reasons why I stopped coding."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="symptom-card" onclick="toggleCard(this)">
+      <div class="card-header">
+        <div class="card-left">
+          <span class="card-badge badge-strong">Strong match</span>
+          <span class="card-title">Impulsivity and emotional intensity</span>
+        </div>
+        <button class="card-toggle" aria-label="Expand">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>Short temper confirmed by family and recognized personally — emotions arrive fast and at full volume before the prefrontal cortex can moderate them. This is emotional dysregulation, not a character flaw.</p>
+          <p>Risk-seeking and novelty-seeking behavior: drawn to stimulating, high-stakes experiences. Boredom isn't just unpleasant — it's intolerable.</p>
+          <p class="card-quote">"I love taking risks or things that stimulate me that is very risky to do."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="symptom-card" onclick="toggleCard(this)">
+      <div class="card-header">
+        <div class="card-left">
+          <span class="card-badge badge-strong">Strong match</span>
+          <span class="card-title">Tangential speech — random topic shifts</span>
+        </div>
+        <button class="card-toggle" aria-label="Expand">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>Friends have specifically pointed out the pattern of introducing completely unrelated topics mid-conversation — especially during high-energy states. The brain makes an internal connection and the thought must come out immediately or it disappears.</p>
+          <p class="card-quote">"Friends have pointed out I bring random topics totally unrelated while talking about a subject — when I'm high energy."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="symptom-card" onclick="toggleCard(this)">
+      <div class="card-header">
+        <div class="card-left">
+          <span class="card-badge badge-present">Present</span>
+          <span class="card-title">Hyperfocus and novelty-seeking</span>
+        </div>
+        <button class="card-toggle" aria-label="Expand">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>Gets intensely interested in new topics, businesses, and ideas — then moves on when the novelty fades. Watches content at 2x speed because normal pace can't sustain attention. Daydreams extensively.</p>
+          <p>This is the flip side of ADHD: when something genuinely engages the brain, the focus locks in completely. It just can't be summoned on demand.</p>
+          <p class="card-quote">"I look for new things, new topics, new businesses. I search for novelty and get interested in it."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider fade-in">Sensory and environmental</div>
+
+  <div class="symptom-grid fade-in">
+    <div class="symptom-card" onclick="toggleCard(this)">
+      <div class="card-header">
+        <div class="card-left">
+          <span class="card-badge badge-notable">Notable</span>
+          <span class="card-title">Sensory overload in crowded environments</span>
+        </div>
+        <button class="card-toggle" aria-label="Expand">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>In environments with many people, all senses heighten simultaneously — sight, hearing, smell. Everything gets noticed. The brain cannot filter irrelevant stimuli and exhausts itself trying to process all of it at once.</p>
+          <p>Notably, the brother experiences the same thing — sensory sensitivity has a strong genetic component and frequently co-occurs with ADHD.</p>
+          <p class="card-quote">"All my senses are heightened and active, I see and notice everything, hear everything around, smell everything. I get very tired in situations like that."</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="symptom-card" onclick="toggleCard(this)">
+      <div class="card-header">
+        <div class="card-left">
+          <span class="card-badge badge-notable">Notable</span>
+          <span class="card-title">Mental fatigue from internal noise</span>
+        </div>
+        <button class="card-toggle" aria-label="Expand">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>Hundreds of simultaneous thoughts throughout the day create profound mental tiredness — not from external demands but from the sheer volume of internal activity. The brain never fully rests.</p>
+          <p>This was described directly to a partner as "a warzone" — one of the most accurate self-descriptions of the ADHD internal experience documented in the literature.</p>
+          <p class="card-quote">"During the day I get very taxed/tired by the 100s of thoughts in my head."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MATCH SCORES -->
+<section class="section" id="scores">
+  <div class="section-label">Section 02</div>
+  <h2 class="section-title fade-in">Criteria match<br>at a glance.</h2>
+  <p class="section-intro fade-in">DSM-5 requires 5+ symptoms in each applicable cluster, present before age 12, across 2+ settings, causing impairment. All three conditions are met here.</p>
+  <div class="scores fade-in">
+    <div class="score-row">
+      <div class="score-label">Inattentive symptoms</div>
+      <div class="score-track"><div class="score-fill" data-target="92"></div></div>
+      <div class="score-pct">9/9</div>
+    </div>
+    <div class="score-row">
+      <div class="score-label">Hyperactive symptoms</div>
+      <div class="score-track"><div class="score-fill" data-target="78"></div></div>
+      <div class="score-pct">7/9</div>
+    </div>
+    <div class="score-row">
+      <div class="score-label">Childhood onset</div>
+      <div class="score-track"><div class="score-fill" data-target="100"></div></div>
+      <div class="score-pct">✓</div>
+    </div>
+    <div class="score-row">
+      <div class="score-label">Multiple settings</div>
+      <div class="score-track"><div class="score-fill" data-target="100"></div></div>
+      <div class="score-pct">✓</div>
+    </div>
+    <div class="score-row">
+      <div class="score-label">Functional impairment</div>
+      <div class="score-track"><div class="score-fill" data-target="100"></div></div>
+      <div class="score-pct">✓</div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="section" id="timeline">
+  <div class="section-label">Section 03</div>
+  <h2 class="section-title fade-in">A life in patterns.</h2>
+  <p class="section-intro fade-in">ADHD is not a phase. Every stage of life tells the same story — the tools changed, the pattern didn't.</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Grades 1–9</div>
+      <div class="timeline-title">Top 3 in class — on pure instinct</div>
+      <div class="timeline-body">Never had complete books. Studied the day before exams alone. Still outperformed peers. Intelligence compensated for systems that weren't working. Sport was constant — the body demanded movement.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Grades 9–12</div>
+      <div class="timeline-title">The cram strategy hits its limit</div>
+      <div class="timeline-body">Volume of content finally exceeded what hours of cramming could cover. Grades declined. The same approach that worked brilliantly for years stopped scaling. Didn't complete A-levels.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">University Foundation</div>
+      <div class="timeline-title">Passed everything — except what required consistency</div>
+      <div class="timeline-body">Passed subjects with self-made theories, studied hours before. Failed maths — the one subject where formulas had to be memorized over time. Repeated twice. Forgot an exam entirely while working. Never attended lectures in repeat semesters. Still passed above others in the final attempt.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Relationships</div>
+      <div class="timeline-title">The warzone no one could see inside</div>
+      <div class="timeline-body">Communication gaps throughout. Told partners: "my mind is like a warzone, I don't think you'd understand." Disagreements rooted not in lack of care but in inability to translate the internal chaos into words in real-time. First breakup triggered months of depression — evidence of intense emotional sensitivity.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-period">Adult life</div>
+      <div class="timeline-title">The pattern is everywhere now</div>
+      <div class="timeline-body">Unfinished documents. Lost items. Meetings scheduled badly. Exhaustion from crowds. Racing thoughts at night. Novelty-chasing. Boredom intolerance. The same ADHD nervous system — in a world that never built systems for it.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ASSESSMENT RESULT -->
+<section class="section" id="assessment">
+  <div class="section-label">Section 04</div>
+  <h2 class="section-title fade-in">The assessment.</h2>
+  <p class="section-intro fade-in">Not a clinical diagnosis — but a clear, documented pattern that meets criteria and warrants professional evaluation.</p>
+
+  <div class="result-box fade-in">
+    <div class="result-label">Assessment summary</div>
+    <h3 class="result-title">Combined-type ADHD<br>presentation — strong indicators</h3>
+    <p class="result-body">Both inattentive and hyperactive-impulsive symptom clusters are present. Onset is clearly in childhood. Impairment spans education, relationships, work, and daily life. This pattern is consistent, lifelong, and documented across multiple contexts. It is not explained by anxiety or situational stress alone.</p>
+    <div class="result-tags">
+      <span class="result-tag highlight">Combined-type ADHD</span>
+      <span class="result-tag">Executive dysfunction</span>
+      <span class="result-tag">Time blindness</span>
+      <span class="result-tag">Rejection sensitivity</span>
+      <span class="result-tag">Sensory sensitivity</span>
+      <span class="result-tag">Emotional dysregulation</span>
+      <span class="result-tag">Hyperfocus cycles</span>
+    </div>
+    <div class="next-step">
+      <strong>What this means:</strong> You are not lazy. You are not careless. You have a nervous system that operates on different fuel — interest, urgency, challenge, and passion — rather than the importance or deadlines that motivate neurotypical people. Everything described here makes sense in that context.
+    </div>
+  </div>
+</section>
+
+<!-- NEXT STEPS -->
+<section class="section" id="next">
+  <div class="section-label">Section 05</div>
+  <h2 class="section-title fade-in">What comes next.</h2>
+  <p class="section-intro fade-in">Self-recognition is the first step. A clinical diagnosis is the one that opens doors.</p>
+
+  <div class="symptom-grid fade-in">
+    <div class="symptom-card" onclick="toggleCard(this)">
+      <div class="card-header">
+        <div class="card-left">
+          <span class="card-badge badge-strong">Step 1</span>
+          <span class="card-title">See a psychiatrist for formal assessment</span>
+        </div>
+        <button class="card-toggle" aria-label="Expand">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>A psychiatrist — privately or through a government hospital — can conduct a formal ADHD assessment. In Sri Lanka, both routes are available. You don't need a referral to start this conversation.</p>
+          <p>Bring this document. Say: "I've been recognizing these patterns throughout my life and I'd like a formal assessment for ADHD." That is all it takes.</p>
+        </div>
+      </div>
+    </div>
+    <div class="symptom-card" onclick="toggleCard(this)">
+      <div class="card-header">
+        <div class="card-left">
+          <span class="card-badge badge-strong">Step 2</span>
+          <span class="card-title">Complete the ASRS v1.1 screener</span>
+        </div>
+        <button class="card-toggle" aria-label="Expand">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>The Adult ADHD Self-Report Scale (ASRS v1.1) is an 18-question WHO-endorsed screener. It's the tool many psychiatrists use themselves as a first step. A high score is a strong signal to take to an appointment.</p>
+          <p>Available free online: search "ASRS v1.1 screener Harvard."</p>
+        </div>
+      </div>
+    </div>
+    <div class="symptom-card" onclick="toggleCard(this)">
+      <div class="card-header">
+        <div class="card-left">
+          <span class="card-badge badge-present">Step 3</span>
+          <span class="card-title">Explore what management looks like for you</span>
+        </div>
+        <button class="card-toggle" aria-label="Expand">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="card-body-inner">
+          <p>ADHD is not cured, but it is very treatable. Options include: stimulant medication (methylphenidate, amphetamine salts), non-stimulant medication, CBT adapted for ADHD, and lifestyle strategies like structured exercise.</p>
+          <p>Many people describe their first effective ADHD medication as the first time they understood what "quiet" felt like inside their own head.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>This document is a personal self-assessment, not a clinical diagnosis. Prepared for professional evaluation. &copy; 2025</p>
+</footer>
+
+<script>
+  function toggleCard(card) {
+    const body = card.querySelector('.card-body');
+    const isOpen = card.classList.contains('open');
+    card.classList.toggle('open', !isOpen);
+    body.style.maxHeight = isOpen ? '0' : body.scrollHeight + 200 + 'px';
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        if (entry.target.classList.contains('timeline-item')) {
+          const items = document.querySelectorAll('.timeline-item');
+          items.forEach((item, i) => {
+            setTimeout(() => item.classList.add('visible'), i * 120);
+          });
+        }
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in, .timeline-item').forEach(el => observer.observe(el));
+
+  const scoreObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        document.querySelectorAll('.score-fill').forEach(bar => {
+          const target = bar.dataset.target;
+          setTimeout(() => { bar.style.width = target + '%'; }, 200);
+        });
+        scoreObserver.disconnect();
+      }
+    });
+  }, { threshold: 0.3 });
+
+  const scoresSection = document.querySelector('.scores');
+  if (scoresSection) scoreObserver.observe(scoresSection);
+</script>
+</body>
+</html>
